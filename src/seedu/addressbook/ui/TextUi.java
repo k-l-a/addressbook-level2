@@ -108,8 +108,8 @@ public class TextUi {
 
     /** Shows message(s) to the user */
     public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+        for(String m : message) {
+            out.println(formatter.format(m));
         }
     }
 
@@ -130,10 +130,7 @@ public class TextUi {
      * Private contact details are hidden.
      */
     private void showPersonListView(List<? extends ReadOnlyPerson> persons) {
-        final List<String> formattedPersons = new ArrayList<>();
-        for (ReadOnlyPerson person : persons) {
-            formattedPersons.add(person.getAsTextHidePrivate());
-        }
+        final List<String> formattedPersons = formatter.getPersonListForViewing(persons);
         showToUserAsIndexedList(formattedPersons);
     }
 
